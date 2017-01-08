@@ -5,9 +5,9 @@ import settings
 import sender
 
 print('Starting scrape...')
-houses = CraigslistHousing(site=settings.CRAIGSLIST_SITE, area='chc', category='apa', filters={'max_price': settings.MAX_PRICE, 'min_price': settings.MIN_PRICE, 'bedrooms': 1})
+houses = CraigslistHousing(site=settings.CRAIGSLIST_SITE, area='chc', category='apa', filters={'max_price': settings.MAX_PRICE, 'min_price': settings.MIN_PRICE, 'bedrooms': [1,2]})
 
-results = houses.get_results(sort_by='newest', geotagged=True, limit=25)
+results = houses.get_results(sort_by='newest', geotagged=True, limit=500)
 apartments = []
 
 for result in results:
@@ -20,5 +20,3 @@ for result in results:
 
 for apartment in apartments:
     sender.post_to_slack(apartment)
-    print('**********************')
-    print(apartment)

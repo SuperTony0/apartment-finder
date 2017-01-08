@@ -10,5 +10,5 @@ def post_to_slack(listing):
     desc = "{0} | <{1}> ".format(listing["name"], listing["url"])
     sc.api_call(
         "chat.postMessage", channel=SLACK_CHANNEL, text=desc,
-        username='pybot', icon_emoji=':house:'
+        username='Craigslist Apartment Bot', icon_emoji=':house:'
     )
