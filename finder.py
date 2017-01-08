@@ -1,24 +1,18 @@
 from craigslist import CraigslistHousing
+from functions import in_box
+from functions import posted_recently
 import settings
 import sender
 
-
+print('Starting scrape...')
 houses = CraigslistHousing(site=settings.CRAIGSLIST_SITE, area='chc', category='apa', filters={'max_price': settings.MAX_PRICE, 'min_price': settings.MIN_PRICE, 'bedrooms': 1})
 
 results = houses.get_results(sort_by='newest', geotagged=True, limit=25)
 apartments = []
 
-def in_box(coords, box):
-    if coords == None:
-        return False
-    if box[0][0] < coords[1] < box[1][0] and box[1][1] > coords[0] > box[0][1]:
-        return True
-    else:
-        return False
-
 for result in results:
     geotag = result["geotag"]
-    if geotag is not None:
+    if geotag is not None and posted_recently(result):
         for box in settings.BOXES.items():
             if in_box(geotag, box[1]):
                 apartments.append(result)

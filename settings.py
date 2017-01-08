@@ -43,6 +43,10 @@ BOXES = {
     "brown-line": [
         [-87.672873,41.932103],
         [-87.64854,41.945032]
+    ],
+    "chicago": [
+        [-87.95517,41.640078],
+        [-87.511597,42.026854]
     ]
 }
 
@@ -52,7 +56,7 @@ BOXES = {
 # How long we should sleep between scrapes of Craigslist.
 # Too fast may get rate limited.
 # Too slow may miss listings.
-SLEEP_INTERVAL = 20 * 60 # 20 minutes
+SLEEP_INTERVAL = 30 * 60 # 30 minutes
 
 # Which slack channel to post the listings into.
 SLACK_CHANNEL = "#housing"
